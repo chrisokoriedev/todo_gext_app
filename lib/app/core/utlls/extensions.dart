@@ -7,7 +7,7 @@ extension PercentSized on double {
   double get wp => (Get.width * (this / 100));
 }
 
-extension ResponsiveText on double {
+extension ResponsiveText on int {
   double get sp => (Get.width / 100 * (this / 3));
 }
 
