@@ -12,9 +12,10 @@ class HomeController extends GetxController {
     tasks.assignAll(taskRepository.readTask());
     ever(tasks, (_) => taskRepository.writeTask(tasks));
   }
+
   @override
   void onClose() {
     super.onClose();
-    
+    tasks.close();
   }
 }
