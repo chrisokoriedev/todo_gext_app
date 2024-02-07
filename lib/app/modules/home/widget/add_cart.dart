@@ -18,14 +18,19 @@ class AddCard extends StatelessWidget {
       height: squareWidth / 2,
       margin: EdgeInsets.all(3.wp),
       child: InkWell(
-          onTap: () {},
+          onTap: () {
+            Get.defaultDialog(
+              title: 'enter name',
+              content: Form(child: Column())
+            );
+          },
           child: DottedBorder(
               color: Colors.grey[400]!,
               dashPattern: const [8, 5],
               child: Center(
                   child: Icon(
                 Icons.add,
-                size: 10.sp,
+                size: 10.wp,
                 color: Colors.grey,
               )))),
     );
