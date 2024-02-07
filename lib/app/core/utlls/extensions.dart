@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:get/get.dart';
 
-extension PercentSized on double {
+extension PercentSized on int {
   double get hp => (Get.height * (this / 100));
   double get wp => (Get.width * (this / 100));
 }
