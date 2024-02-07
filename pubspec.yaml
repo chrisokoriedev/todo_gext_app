@@ -18,6 +18,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get:
   get_storage:
+  equatable:
 
 dev_dependencies:
   flutter_test:
