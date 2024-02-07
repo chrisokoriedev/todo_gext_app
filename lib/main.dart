@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:todo_gext_app/app/data/services/storage/services.dart';
+import 'package:todo_gext_app/app/modules/home/controller/binding.dart';
 import 'package:todo_gext_app/app/modules/home/view.dart';
 
 Future<void> main() async {
@@ -22,6 +24,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyHomePage(),
+      initialBinding: HomeBiniding(),
+      builder: EasyLoading.init(),
     );
   }
 }

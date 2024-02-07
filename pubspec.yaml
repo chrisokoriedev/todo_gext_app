@@ -19,6 +19,7 @@ dependencies:
   get:
   get_storage:
   equatable:
+  flutter_easyloading:
 
 dev_dependencies:
   flutter_test:
