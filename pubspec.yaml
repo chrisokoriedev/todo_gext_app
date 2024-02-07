@@ -20,6 +20,7 @@ dependencies:
   get_storage:
   equatable:
   flutter_easyloading:
+  dotted_border:
 
 dev_dependencies:
   flutter_test:
