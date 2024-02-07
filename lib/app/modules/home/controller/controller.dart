@@ -8,6 +8,7 @@ class HomeController extends GetxController {
   HomeController({required this.taskRepository});
   final tasks = <TaskModel>[].obs;
   final formKey = GlobalKey();
+  final editController=TextEditingController();
   @override
   void onInit() {
     super.onInit();

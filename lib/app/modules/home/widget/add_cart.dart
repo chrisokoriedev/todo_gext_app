@@ -20,9 +20,16 @@ class AddCard extends StatelessWidget {
       child: InkWell(
           onTap: () {
             Get.defaultDialog(
-              title: 'enter name',
-              content: Form(child: Column())
-            );
+                title: 'enter name',
+                content: Form(
+                    key: homeController.formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          controller: homeController.editController,
+                        )
+                      ],
+                    )));
           },
           child: DottedBorder(
               color: Colors.grey[400]!,
