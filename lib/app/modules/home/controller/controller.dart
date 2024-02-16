@@ -7,7 +7,7 @@ class HomeController extends GetxController {
   TaskRepository taskRepository;
   HomeController({required this.taskRepository});
   final tasks = <TaskModel>[].obs;
-  final formKey = GlobalKey();
+  final formKey = GlobalKey<FormState>();
   final chipIndex = 0.obs;
   final editController = TextEditingController();
   @override
