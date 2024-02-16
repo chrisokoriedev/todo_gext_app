@@ -20,15 +20,24 @@ class AddCard extends StatelessWidget {
       child: InkWell(
           onTap: () {
             Get.defaultDialog(
-                title: 'enter name',
+                title: 'Task Type',
                 content: Form(
                     key: homeController.formKey,
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          controller: homeController.editController,
-                        )
-                      ],
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 3.wp),
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            controller: homeController.editController,
+                            validator: (text) {
+                              if (text!.isEmpty) {
+                                return 'Enter task title';
+                              }
+                              return null;
+                            },
+                          )
+                        ],
+                      ),
                     )));
           },
           child: DottedBorder(
