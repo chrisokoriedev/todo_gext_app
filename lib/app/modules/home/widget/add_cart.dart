@@ -11,7 +11,7 @@ class AddCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final icons = getIcons();
+    final iconData = getIcons();
     var squareWidth = Get.width - 12.wp;
     return Container(
       width: squareWidth / 2,
@@ -20,24 +20,42 @@ class AddCard extends StatelessWidget {
       child: InkWell(
           onTap: () {
             Get.defaultDialog(
+                radius: 10,
                 title: 'Task Type',
+                titleStyle:
+                    TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
                 content: Form(
                     key: homeController.formKey,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 3.wp),
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            controller: homeController.editController,
-                            validator: (text) {
-                              if (text!.isEmpty) {
-                                return 'Enter task title';
-                              }
-                              return null;
-                            },
-                          )
-                        ],
-                      ),
+                    child: Column(
+                      children: [
+                        Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 3.wp, vertical: 5.hp),
+                            child: TextFormField(
+                                controller: homeController.editController,
+                                validator: (text) {
+                                  if (text!.isEmpty) {
+                                    return 'Enter task title';
+                                  }
+                                  return null;
+                                })),
+                        Wrap(
+                            spacing: 2.wp,
+                            children: iconData
+                                .map((e) => Obx(() {
+                                      final index = iconData.indexOf(e);
+                                      return ChoiceChip(
+                                          label: e,
+                                          onSelected: (bool selected) {
+                                            homeController.chipIndex.value =
+                                                selected ? index : 0;
+                                          },
+                                          selected:
+                                              homeController.chipIndex.value ==
+                                                  index);
+                                    }))
+                                .toList())
+                      ],
                     )));
           },
           child: DottedBorder(
