@@ -43,7 +43,9 @@ class AddCard extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20))),
                     onPressed: () {
-                      if (homeController.formKey.currentState!.validate()) {}
+                      if (homeController.formKey.currentState!.validate()) {
+                        
+                      }
                     },
                     icon: const Icon(Icons.check, color: Colors.white),
                     label: Text(
