@@ -1,8 +1,10 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:todo_gext_app/app/core/utlls/extensions.dart';
 import 'package:todo_gext_app/app/core/value/colors.dart';
+import 'package:todo_gext_app/app/data/model/task.dart';
 import 'package:todo_gext_app/app/modules/home/controller/controller.dart';
 import 'package:todo_gext_app/app/widget/icons.dart';
 
@@ -44,7 +46,21 @@ class AddCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20))),
                     onPressed: () {
                       if (homeController.formKey.currentState!.validate()) {
-                        
+                        int iconPicked =
+                            iconData[homeController.chipIndex.value]
+                                .icon!
+                                .codePoint;
+                        String color = iconData[homeController.chipIndex.value]
+                            .color!
+                            .toHex();
+                        var task = TaskModel(
+                            title: homeController.editController.text,
+                            icon: iconPicked,
+                            color: color);
+                        Get.back();
+                        homeController.addTask(task)
+                            ? EasyLoading.showSuccess('Create Success')
+                            : EasyLoading.showError('Duplicate task');
                       }
                     },
                     icon: const Icon(Icons.check, color: Colors.white),
@@ -89,6 +105,8 @@ class AddCard extends StatelessWidget {
                                 .toList())
                       ],
                     )));
+            homeController.chipIndex(0);
+            homeController.editController.clear();
           },
           child: DottedBorder(
               color: Colors.grey[400]!,

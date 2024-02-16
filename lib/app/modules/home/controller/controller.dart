@@ -26,4 +26,12 @@ class HomeController extends GetxController {
   void chnageChipdIndex(int value) {
     chipIndex.value = value;
   }
+
+  bool addTask(TaskModel task) {
+    if (tasks.contains(task)) {
+      return false;
+    }
+    tasks.add(task);
+    return true;
+  }
 }
