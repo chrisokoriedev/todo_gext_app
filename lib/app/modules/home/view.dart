@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todo_gext_app/app/core/value/colors.dart';
+import 'package:todo_gext_app/app/data/model/task.dart';
 import 'package:todo_gext_app/app/modules/home/controller/controller.dart';
 import 'package:todo_gext_app/app/core/utlls/extensions.dart';
 import 'package:todo_gext_app/app/modules/home/widget/add_cart.dart';
+
+import 'widget/task_card.dart';
 
 class MyHomePage extends GetView<HomeController> {
   const MyHomePage({super.key});
@@ -22,7 +26,13 @@ class MyHomePage extends GetView<HomeController> {
               crossAxisCount: 2,
               physics: const ClampingScrollPhysics(),
               shrinkWrap: true,
-              children: [AddCard()],
+              children: [
+                TaskCard(
+                  task:
+                      const TaskModel(title: 'hey', icon: 0xeddd, color: '0xff3c33'),
+                ),
+                AddCard()
+              ],
             ),
           ],
         ),
