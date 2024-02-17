@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todo_gext_app/app/core/value/colors.dart';
 import 'package:todo_gext_app/app/data/model/task.dart';
 import 'package:todo_gext_app/app/modules/home/controller/controller.dart';
 import 'package:todo_gext_app/app/core/utlls/extensions.dart';
@@ -29,7 +28,7 @@ class MyHomePage extends GetView<HomeController> {
               children: [
                 TaskCard(
                   task: const TaskModel(
-                      title: 'hey', icon: 0xe59c, color: '0xfffff'),
+                      title: 'hey', icon: 0xe59c, color: '0xff42A5F5'),
                 ),
                 AddCard()
               ],
