@@ -5,11 +5,11 @@ import '../core/value/colors.dart';
 
 List<Icon> getIcons() {
   return const [
-    Icon(IconData(personIcon), color: purple),
-    Icon(IconData(workIcon), color: pinkColor),
-    Icon(IconData(movieIcon), color: green),
-    Icon(IconData(sportIcon), color: yellow),
-    Icon(IconData(travelIcon), color: deepPink),
-    Icon(IconData(shopIcon), color: lightBlue)
+    Icon(IconData(personIcon, fontFamily: 'MaterialIcons'), color: purple),
+    Icon(IconData(workIcon, fontFamily: 'MaterialIcons'), color: pinkColor),
+    Icon(IconData(movieIcon, fontFamily: 'MaterialIcons'), color: green),
+    Icon(IconData(sportIcon, fontFamily: 'MaterialIcons'), color: yellow),
+    Icon(IconData(travelIcon, fontFamily: 'MaterialIcons'), color: deepPink),
+    Icon(IconData(shopIcon, fontFamily: 'MaterialIcons'), color: lightBlue)
   ];
 }
