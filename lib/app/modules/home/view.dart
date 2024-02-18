@@ -27,8 +27,7 @@ class MyHomePage extends GetView<HomeController> {
               shrinkWrap: true,
               children: [
                 TaskCard(
-                  task: const TaskModel(
-                      title: 'hey', icon: 0xe59c, color: '0xff42A5F5'),
+                  task: const TaskModel(title: 'hey', icon: 0xe59c, color: '42A5F5'),
                 ),
                 AddCard()
               ],

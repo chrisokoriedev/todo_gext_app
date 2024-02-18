@@ -12,7 +12,7 @@ class TaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = HexColor.fromHex(task.color);
+    final Color color = HexColor.fromHex(task.color);
     final squareWidth = Get.width - 12.wp;
     return Container(
       width: squareWidth / 2,
