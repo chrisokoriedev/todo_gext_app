@@ -30,7 +30,15 @@ class MyHomePage extends GetView<HomeController> {
                 children: [
                   ...controller.tasks
                       .map(
-                        (element) => TaskCard(task: element),
+                        (element) => LongPressDraggable(
+                            onDragStarted: () =>
+                                controller.changeDeleting(true),
+                            onDraggableCanceled: (_, __) =>
+                                controller.changeDeleting(false),
+                            onDragEnd: (_) => controller.changeDeleting(true),
+                            feedback: Opacity(
+                                opacity: 0.4, child: TaskCard(task: element)),
+                            child: TaskCard(task: element)),
                       )
                       .toList(),
                   AddCard()
