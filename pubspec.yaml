@@ -22,7 +22,6 @@ dependencies:
   flutter_easyloading:
   dotted_border:
   step_progress_indicator:
-  flutter_staggered_grid_view:
 
 dev_dependencies:
   flutter_test:

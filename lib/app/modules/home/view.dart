@@ -21,11 +21,11 @@ class MyHomePage extends GetView<HomeController> {
         ),
       ),
       body: SafeArea(
-        child: ListView(
-          padding: EdgeInsets.all(4.wp),
-          children: [
-            Obx(
-              () => GridView.count(
+        child: Obx(
+          () => ListView(
+            padding: EdgeInsets.all(4.wp),
+            children: [
+              GridView.count(
                 crossAxisCount: 2,
                 physics: const ClampingScrollPhysics(),
                 shrinkWrap: true,
@@ -33,7 +33,7 @@ class MyHomePage extends GetView<HomeController> {
                   ...controller.tasks
                       .map(
                         (element) => LongPressDraggable(
-                          data: element,
+                            data: element,
                             onDragStarted: () =>
                                 controller.changeDeleting(true),
                             onDraggableCanceled: (_, __) =>
@@ -47,25 +47,27 @@ class MyHomePage extends GetView<HomeController> {
                   AddCard()
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Obx(() => DragTarget<TaskModel>(
-        onAccept: (TaskModel task){
-          controller.deleteTask(task);
-          EasyLoading.showSuccess('Deleted Task');
-        },
-        builder: (_,__,___) {
-          return FloatingActionButton(
-                backgroundColor:
-                    controller.deleting.value ? Colors.red[400] : Colors.purple[100],
-                onPressed: () {},
-                child: Icon(controller.deleting.value ? Icons.delete : Icons.add,color: Colors.white,),
-              );
-        }
-      )),
+      floatingActionButton:
+          Obx(() => DragTarget<TaskModel>(onAccept: (TaskModel task) {
+                controller.deleteTask(task);
+                EasyLoading.showSuccess('Deleted Task');
+              }, builder: (_, __, ___) {
+                return FloatingActionButton(
+                  backgroundColor: controller.deleting.value
+                      ? Colors.red[400]
+                      : Colors.purple[100],
+                  onPressed: () {},
+                  child: Icon(
+                    controller.deleting.value ? Icons.delete : Icons.add,
+                    color: Colors.white,
+                  ),
+                );
+              })),
     );
   }
 }
