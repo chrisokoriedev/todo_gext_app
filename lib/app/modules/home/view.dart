@@ -5,6 +5,7 @@ import 'package:todo_gext_app/app/data/model/task.dart';
 import 'package:todo_gext_app/app/modules/home/controller/controller.dart';
 import 'package:todo_gext_app/app/core/utlls/extensions.dart';
 import 'package:todo_gext_app/app/modules/home/widget/add_cart.dart';
+import 'package:todo_gext_app/app/modules/home/widget/add_dialog.dart';
 
 import 'widget/task_card.dart';
 
@@ -53,24 +54,25 @@ class MyHomePage extends GetView<HomeController> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: DragTarget<TaskModel>(
+        onAccept: (TaskModel task) {
+          controller.deleteTask(task);
+          EasyLoading.showSuccess('Deleted Task');
+        },
         builder: (_, __, ___) {
           return Obx(
             () => FloatingActionButton(
               backgroundColor: controller.deleting.value
                   ? Colors.red[400]
                   : Colors.purple[100],
-              onPressed: () {},
+              onPressed: () => Get.to(AddDialog(),
+                  transition: Transition.downToUp,
+                  duration: const Duration(milliseconds: 450)),
               child: Icon(
                 controller.deleting.value ? Icons.delete : Icons.add,
                 color: Colors.white,
               ),
             ),
           );
-        },
-        onAccept: (TaskModel task) {
-          controller.deleteTask(task);
-          EasyLoading.showSuccess('Deleted Task');
-          controller.deleting(false);
         },
       ),
     );
