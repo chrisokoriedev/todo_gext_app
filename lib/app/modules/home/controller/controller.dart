@@ -38,6 +38,10 @@ class HomeController extends GetxController {
     deleting.value = value;
   }
 
+  void deleteTask(TaskModel task) {
+    tasks.remove(task);
+  }
+
   bool addTask(TaskModel task) {
     if (tasks.contains(task)) {
       return false;
