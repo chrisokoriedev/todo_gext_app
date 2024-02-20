@@ -52,22 +52,27 @@ class MyHomePage extends GetView<HomeController> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton:
-          Obx(() => DragTarget<TaskModel>(onAccept: (TaskModel task) {
-                controller.deleteTask(task);
-                EasyLoading.showSuccess('Deleted Task');
-              }, builder: (_, __, ___) {
-                return FloatingActionButton(
-                  backgroundColor: controller.deleting.value
-                      ? Colors.red[400]
-                      : Colors.purple[100],
-                  onPressed: () {},
-                  child: Icon(
-                    controller.deleting.value ? Icons.delete : Icons.add,
-                    color: Colors.white,
-                  ),
-                );
-              })),
+      floatingActionButton: DragTarget<TaskModel>(
+        builder: (_, __, ___) {
+          return Obx(
+            () => FloatingActionButton(
+              backgroundColor: controller.deleting.value
+                  ? Colors.red[400]
+                  : Colors.purple[100],
+              onPressed: () {},
+              child: Icon(
+                controller.deleting.value ? Icons.delete : Icons.add,
+                color: Colors.white,
+              ),
+            ),
+          );
+        },
+        onAccept: (TaskModel task) {
+          controller.deleteTask(task);
+          EasyLoading.showSuccess('Deleted Task');
+          controller.deleting(false);
+        },
+      ),
     );
   }
 }
