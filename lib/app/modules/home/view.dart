@@ -56,7 +56,7 @@ class MyHomePage extends GetView<HomeController> {
       floatingActionButton: DragTarget<TaskModel>(
         onAccept: (TaskModel task) {
           controller.deleteTask(task);
-          EasyLoading.showSuccess('Deleted Task');
+          // EasyLoading.showSuccess('Deleted Task');
         },
         builder: (_, __, ___) {
           return Obx(

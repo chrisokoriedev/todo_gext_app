@@ -21,7 +21,7 @@ dependencies:
   equatable:
   flutter_easyloading:
   dotted_border:
-  # step_progress_indicator:
+  step_progress_indicator:
 
 dev_dependencies:
   flutter_test:
