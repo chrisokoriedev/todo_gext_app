@@ -18,11 +18,11 @@ class HomeController extends GetxController {
     ever(tasks, (_) => taskRepository.writeTask(tasks));
   }
 
-  // @override
-  // void onClose() {
-  //   super.onClose();
-  //   tasks.close();
-  // }
+  @override
+  void onClose() {
+    super.onClose();
+    tasks.close();
+  }
 
   @override
   void dispose() {
