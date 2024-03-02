@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Todo App',
       theme: ThemeData(
-        // useMaterial3: true,
+        useMaterial3: true,
       ),
       home: const MyHomePage(),
       initialBinding: HomeBiniding(),
