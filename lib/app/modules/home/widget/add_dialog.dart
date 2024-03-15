@@ -35,6 +35,19 @@ class AddDialog extends StatelessWidget {
                       if (homeCtrl.formKey.currentState!.validate()) {
                         if (homeCtrl.task.value == null) {
                           EasyLoading.showError(AppString.enterTaskType);
+                        } else {
+                          var success = homeCtrl.updateTask(
+                              homeCtrl.task.value!,
+                              homeCtrl.editController.text);
+                          if (success) {
+                            EasyLoading.showSuccess(AppString.todoItemAdded);
+                            Get.back();
+                            homeCtrl.editController.clear();
+
+                            homeCtrl.changeTask(null);
+                          } else {
+                            EasyLoading.showInfo(AppString.todoItemExist);
+                          }
                         }
                       }
                     },
@@ -53,18 +66,8 @@ class AddDialog extends StatelessWidget {
               validator: (value) {
                 if (value!.isEmpty) {
                   return AppString.enterTodoItem;
-                } else {
-                  var success = homeCtrl.updateTask(
-                      homeCtrl.task.value!, homeCtrl.editController.text);
-                  if (success) {
-                    EasyLoading.showSuccess(AppString.todoItemAdded);
-                    Get.back();
-                    homeCtrl.changeTask(null);
-                  } else {
-                    EasyLoading.showInfo(AppString.todoItemExist);
-                    homeCtrl.editController.clear();
-                  }
                 }
+
                 return null;
               },
               decoration: InputDecoration(
