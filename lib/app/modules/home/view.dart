@@ -6,6 +6,7 @@ import 'package:todo_gext_app/app/modules/home/controller/controller.dart';
 import 'package:todo_gext_app/app/core/utlls/extensions.dart';
 import 'package:todo_gext_app/app/modules/home/widget/add_cart.dart';
 import 'package:todo_gext_app/app/modules/home/widget/add_dialog.dart';
+import 'package:todo_gext_app/app/widget/string_const.dart';
 
 import 'widget/task_card.dart';
 
@@ -17,8 +18,8 @@ class MyHomePage extends GetView<HomeController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'My Tasks',
-          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+          AppString.myTask,
+          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
         ),
       ),
       body: SafeArea(
@@ -56,7 +57,7 @@ class MyHomePage extends GetView<HomeController> {
       floatingActionButton: DragTarget<TaskModel>(
         onAccept: (TaskModel task) {
           controller.deleteTask(task);
-          EasyLoading.showSuccess('Deleted Task');
+          EasyLoading.showSuccess(AppString.deletedTask);
         },
         builder: (_, __, ___) {
           return Obx(
@@ -69,6 +70,8 @@ class MyHomePage extends GetView<HomeController> {
                   Get.to(AddDialog(),
                       transition: Transition.downToUp,
                       duration: const Duration(milliseconds: 450));
+                } else {
+                  EasyLoading.showInfo(AppString.createTaskType);
                 }
               },
               child: Icon(
