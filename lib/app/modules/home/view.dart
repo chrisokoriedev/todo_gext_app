@@ -55,10 +55,6 @@ class MyHomePage extends GetView<HomeController> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: DragTarget<TaskModel>(
-        onAccept: (TaskModel task) {
-          controller.deleteTask(task);
-          EasyLoading.showSuccess(AppString.deletedTask);
-        },
         builder: (_, __, ___) {
           return Obx(
             () => FloatingActionButton(
@@ -66,7 +62,7 @@ class MyHomePage extends GetView<HomeController> {
                   ? Colors.red[400]
                   : Colors.purple[100],
               onPressed: () {
-                if (controller.tasks.isEmpty) {
+                if (controller.tasks.isNotEmpty) {
                   Get.to(AddDialog(),
                       transition: Transition.downToUp,
                       duration: const Duration(milliseconds: 450));
@@ -77,9 +73,15 @@ class MyHomePage extends GetView<HomeController> {
               child: Icon(
                 controller.deleting.value ? Icons.delete : Icons.add,
                 color: Colors.white,
+                size: 30,
               ),
             ),
           );
+        },
+        onAccept: (TaskModel task) {
+          controller.deleteTask(task);
+          controller.task.refresh();
+          EasyLoading.showSuccess(AppString.deletedTask);
         },
       ),
     );
