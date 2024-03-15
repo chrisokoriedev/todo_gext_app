@@ -7,6 +7,7 @@ class HomeController extends GetxController {
   TaskRepository taskRepository;
   HomeController({required this.taskRepository});
   final tasks = <TaskModel>[].obs;
+  final task = Rx<TaskModel?>(null);
   final formKey = GlobalKey<FormState>();
   final chipIndex = 0.obs;
   final deleting = false.obs;
@@ -20,8 +21,9 @@ class HomeController extends GetxController {
 
   @override
   void onClose() {
-    super.onClose();
+    editController.dispose();
     tasks.close();
+    super.onClose();
   }
 
   @override
@@ -32,6 +34,10 @@ class HomeController extends GetxController {
 
   void chnageChipdIndex(int value) {
     chipIndex.value = value;
+  }
+
+  void changeTask(TaskModel? select) {
+    task.value = select;
   }
 
   void changeDeleting(bool value) {

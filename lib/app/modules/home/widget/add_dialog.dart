@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:todo_gext_app/app/core/utlls/extensions.dart';
 import 'package:todo_gext_app/app/modules/home/controller/controller.dart';
 
@@ -19,7 +20,12 @@ class AddDialog extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                    onPressed: () => Get.back(), icon: const Icon(Icons.close)),
+                    onPressed: () {
+                      Get.back();
+                      homeCtrl.editController.clear();
+                      homeCtrl.changeTask(null);
+                    },
+                    icon: const Icon(Icons.close)),
                 TextButton(
                     style: ButtonStyle(
                         overlayColor: MaterialStateColor.resolveWith(
@@ -50,21 +56,35 @@ class AddDialog extends StatelessWidget {
             SizedBox(height: 5.wp),
             Text(
               "Add to ",
-              style: TextStyle(fontSize: 14.sp, color: Colors.grey),
+              style: TextStyle(fontSize: 14.sp, color: Colors.grey[700]),
             ),
-            ...homeCtrl.tasks.map((element) {
-              print(element);
-              print('element');
-              return Row(
-                  children: [
-                    Icon(
-                      IconData(element.icon, fontFamily: "MaterialIcons"),
-                      color: HexColor.fromHex(element.color),
-                    ),
-                    Text(element.title),
-                  ],
-                );
-            }).toList()
+            ...homeCtrl.tasks
+                .map((element) => Obx(
+                      () => InkWell(
+                        onTap: () => homeCtrl.changeTask(element),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 2.wp),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    IconData(element.icon,
+                                        fontFamily: "MaterialIcons"),
+                                    color: HexColor.fromHex(element.color),
+                                  ),
+                                  Text(element.title),
+                                ],
+                              ),
+                              if (homeCtrl.task.value == element)
+                                const Icon(Icons.check, color: Colors.blue)
+                            ],
+                          ),
+                        ),
+                      ),
+                    ))
+                .toList()
           ],
         ),
       ),
