@@ -37,10 +37,34 @@ class AddDialog extends StatelessWidget {
             ),
             TextFormField(
               controller: homeCtrl.editController,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Enter  todo item';
+                }
+                return null;
+              },
               decoration: InputDecoration(
                   focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey[100]!))),
-            )
+            ),
+            SizedBox(height: 5.wp),
+            Text(
+              "Add to ",
+              style: TextStyle(fontSize: 14.sp, color: Colors.grey),
+            ),
+            ...homeCtrl.tasks.map((element) {
+              print(element);
+              print('element');
+              return Row(
+                  children: [
+                    Icon(
+                      IconData(element.icon, fontFamily: "MaterialIcons"),
+                      color: HexColor.fromHex(element.color),
+                    ),
+                    Text(element.title),
+                  ],
+                );
+            }).toList()
           ],
         ),
       ),
