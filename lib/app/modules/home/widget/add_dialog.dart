@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:todo_gext_app/app/core/utlls/extensions.dart';
 import 'package:todo_gext_app/app/modules/home/controller/controller.dart';
+import 'package:todo_gext_app/app/widget/string_const.dart';
 
 class AddDialog extends StatelessWidget {
   final homeCtrl = Get.find<HomeController>();
@@ -30,22 +31,39 @@ class AddDialog extends StatelessWidget {
                     style: ButtonStyle(
                         overlayColor: MaterialStateColor.resolveWith(
                             (states) => Colors.transparent)),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (homeCtrl.formKey.currentState!.validate()) {
+                        if (homeCtrl.task.value == null) {
+                          EasyLoading.showError(AppString.enterTaskType);
+                        }
+                      }
+                    },
                     child: Text(
-                      'Done',
+                      AppString.done,
                       style: TextStyle(fontSize: 14.sp),
                     ))
               ],
             ),
             Text(
-              'New Task',
+              AppString.newTask,
               style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
             ),
             TextFormField(
               controller: homeCtrl.editController,
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Enter  todo item';
+                  return AppString.enterTodoItem;
+                } else {
+                  var success = homeCtrl.updateTask(
+                      homeCtrl.task.value!, homeCtrl.editController.text);
+                  if (success) {
+                    EasyLoading.showSuccess(AppString.todoItemAdded);
+                    Get.back();
+                    homeCtrl.changeTask(null);
+                  } else {
+                    EasyLoading.showInfo(AppString.todoItemExist);
+                    homeCtrl.editController.clear();
+                  }
                 }
                 return null;
               },
@@ -54,10 +72,8 @@ class AddDialog extends StatelessWidget {
                       borderSide: BorderSide(color: Colors.grey[100]!))),
             ),
             SizedBox(height: 5.wp),
-            Text(
-              "Add to ",
-              style: TextStyle(fontSize: 14.sp, color: Colors.grey[700]),
-            ),
+            Text(AppString.addTo,
+                style: TextStyle(fontSize: 14.sp, color: Colors.grey[700])),
             ...homeCtrl.tasks
                 .map((element) => Obx(
                       () => InkWell(
@@ -71,7 +87,7 @@ class AddDialog extends StatelessWidget {
                                 children: [
                                   Icon(
                                     IconData(element.icon,
-                                        fontFamily: "MaterialIcons"),
+                                        fontFamily: AppString.materialIcons),
                                     color: HexColor.fromHex(element.color),
                                   ),
                                   Text(element.title),

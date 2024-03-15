@@ -40,6 +40,24 @@ class HomeController extends GetxController {
     task.value = select;
   }
 
+  updateTask(TaskModel taskModel, String taskItem) {
+    var todos = taskModel.todoList ?? [];
+    if (containTodo(todos, taskItem)) {
+      return false;
+    }
+    var todo = {'title': taskItem, 'done': false};
+    todos.add(todo);
+    var newTask = taskModel.copywith(todoList: todos);
+    int oldIndex = tasks.indexOf(taskModel);
+    tasks[oldIndex] = newTask;
+    tasks.refresh();
+    return true;
+  }
+
+  bool containTodo(List todos, taskItem) {
+    return todos.any((element) => element['title'] == taskItem);
+  }
+
   void changeDeleting(bool value) {
     deleting.value = value;
   }
