@@ -7,6 +7,7 @@ class HomeController extends GetxController {
   TaskRepository taskRepository;
   HomeController({required this.taskRepository});
   final tasks = <TaskModel>[].obs;
+  final task = Rx<TaskModel?>(null);
   final formKey = GlobalKey<FormState>();
   final chipIndex = 0.obs;
   final deleting = false.obs;
@@ -20,8 +21,9 @@ class HomeController extends GetxController {
 
   @override
   void onClose() {
-    super.onClose();
+    editController.dispose();
     tasks.close();
+    super.onClose();
   }
 
   @override
@@ -32,6 +34,28 @@ class HomeController extends GetxController {
 
   void chnageChipdIndex(int value) {
     chipIndex.value = value;
+  }
+
+  void changeTask(TaskModel? select) {
+    task.value = select;
+  }
+
+  updateTask(TaskModel taskModel, String taskItem) {
+    var todos = taskModel.todoList ?? [];
+    if (containTodo(todos, taskItem)) {
+      return false;
+    }
+    var todo = {'title': taskItem, 'done': false};
+    todos.add(todo);
+    var newTask = taskModel.copywith(todoList: todos);
+    int oldIndex = tasks.indexOf(taskModel);
+    tasks[oldIndex] = newTask;
+    tasks.refresh();
+    return true;
+  }
+
+  bool containTodo(List todos, taskItem) {
+    return todos.any((element) => element['title'] == taskItem);
   }
 
   void changeDeleting(bool value) {

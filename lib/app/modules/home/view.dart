@@ -64,9 +64,13 @@ class MyHomePage extends GetView<HomeController> {
               backgroundColor: controller.deleting.value
                   ? Colors.red[400]
                   : Colors.purple[100],
-              onPressed: () => Get.to(AddDialog(),
-                  transition: Transition.downToUp,
-                  duration: const Duration(milliseconds: 450)),
+              onPressed: () {
+                if (controller.tasks.isEmpty) {
+                  Get.to(AddDialog(),
+                      transition: Transition.downToUp,
+                      duration: const Duration(milliseconds: 450));
+                }
+              },
               child: Icon(
                 controller.deleting.value ? Icons.delete : Icons.add,
                 color: Colors.white,

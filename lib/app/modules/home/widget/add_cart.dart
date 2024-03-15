@@ -62,6 +62,8 @@ class AddCard extends StatelessWidget {
                             ? EasyLoading.showSuccess('Create Success')
                             : EasyLoading.showError('Duplicate task');
                       }
+                      homeController.chipIndex(0);
+                      homeController.editController.clear();
                     },
                     icon: const Icon(Icons.check, color: Colors.white),
                     label: Text(
