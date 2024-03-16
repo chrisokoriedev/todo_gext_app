@@ -89,4 +89,6 @@ class HomeController extends GetxController {
       }
     }
   }
+
+  addTodo() {}
 }
