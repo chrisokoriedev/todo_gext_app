@@ -9,13 +9,13 @@ class DoneTodoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => homeCtrl.doneTask.isEmpty && homeCtrl.doneTask.isEmpty
+    return Obx(() => homeCtrl.doneTodos.isEmpty && homeCtrl.doneTodos.isEmpty
         ? const Column(
             children: [Placeholder(), Text(AppString.addTodo)],
           )
         : ListView(
             shrinkWrap: true,
-            children: [],
+            children: const [],
           ));
   }
 }

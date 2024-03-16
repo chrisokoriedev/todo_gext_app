@@ -10,7 +10,7 @@ class DoingTodoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => homeCtrl.doingTask.isEmpty && homeCtrl.doneTask.isEmpty
+    return Obx(() => homeCtrl.doingTodos.isEmpty && homeCtrl.doneTodos.isEmpty
         ? const Column(
             children: [Placeholder(), Text(AppString.addTodo)],
           )
@@ -18,7 +18,7 @@ class DoingTodoList extends StatelessWidget {
             shrinkWrap: true,
             physics: const ClampingScrollPhysics(),
             children: [
-              ...homeCtrl.doingTask.map((element) => Padding(
+              ...homeCtrl.doingTodos.map((element) => Padding(
                     padding:
                         EdgeInsets.symmetric(vertical: 3.wp, horizontal: 5.wp),
                     child: Row(children: [
@@ -30,7 +30,7 @@ class DoingTodoList extends StatelessWidget {
                               (states) => Colors.grey[200]!),
                           value: element['done'],
                           onChanged: (value) {
-                            homeCtrl.doneTodo();
+                            homeCtrl.doneTodo(element['title']);
                           },
                         ),
                       ),

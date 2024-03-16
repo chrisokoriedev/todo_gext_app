@@ -56,7 +56,7 @@ class DetailScreen extends StatelessWidget {
                 SizedBox(height: 3.hp),
                 Obx(() {
                   var totalTodos =
-                      homeCtrl.doingTask.length + homeCtrl.doneTask.length;
+                      homeCtrl.doingTodos.length + homeCtrl.doneTodos.length;
                   return Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12.wp),
                     child: Row(
@@ -66,7 +66,7 @@ class DetailScreen extends StatelessWidget {
                         Expanded(
                             child: StepProgressIndicator(
                           totalSteps: totalTodos == 0 ? 1 : totalTodos,
-                          currentStep: homeCtrl.doneTask.length,
+                          currentStep: homeCtrl.doneTodos.length,
                           size: 5,
                           padding: 0,
                           selectedGradientColor: LinearGradient(
