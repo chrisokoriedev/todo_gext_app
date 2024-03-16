@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_gext_app/app/data/model/task.dart';
@@ -90,5 +91,26 @@ class HomeController extends GetxController {
     }
   }
 
-  addTodo( String title) {}
+  bool addTodo(String title) {
+    var todo = {'title': title, 'done': false};
+    if (doingTask.any((element) => mapEquals<String, dynamic>(todo, element))) {
+      return false;
+    }
+    var doneTodo = {'title': title, 'done': true};
+    if (doneTask
+        .any((element) => mapEquals<String, dynamic>(doneTodo, element))) {
+      return false;
+    }
+    doingTask.add(todo);
+    return true;
+  }
+
+  void updateTodo(TaskModel taskModel) {
+    var newTodos = <Map<String, dynamic>>[];
+    newTodos.addAll([...doingTask, ...doneTask]);
+    var newTask = task.value!.copywith(todoList: newTodos);
+    int oldIndex = tasks.indexOf(taskModel);
+    tasks[oldIndex] = newTask;
+    tasks.refresh();
+  }
 }
