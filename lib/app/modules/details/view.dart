@@ -14,7 +14,6 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var task = homeCtrl.task.value;
     var color = HexColor.fromHex(task!.color);
-    var totalTodos = homeCtrl.doingTask.length + homeCtrl.doneTask.length;
     return Scaffold(
         body: Form(
       key: homeCtrl.formKey,
@@ -24,7 +23,16 @@ class DetailScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 2.wp, vertical: 3.wp),
             child: Column(
               children: [
-                const Align(alignment: Alignment.topLeft, child: BackButton()),
+                Align(
+                    alignment: Alignment.topLeft,
+                    child: BackButton(
+                      onPressed: () {
+                        Get.back();
+                        homeCtrl.updateTodo();
+                        homeCtrl.changeTask(null);
+                        homeCtrl.editController.clear();
+                      },
+                    )),
                 SizedBox(height: 2.hp),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4.wp),
@@ -44,33 +52,38 @@ class DetailScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 3.hp),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.wp),
-                  child: Row(
-                    children: [
-                      Text('$totalTodos Task'),
-                      SizedBox(width: 3.wp),
-                      Expanded(
-                          child: StepProgressIndicator(
-                        totalSteps: totalTodos == 0 ? 1 : totalTodos,
-                        currentStep: homeCtrl.doneTask.length,
-                        size: 5,
-                        padding: 0,
-                        selectedGradientColor: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [color.withOpacity(0.5), color]),
-                        unselectedGradientColor: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              Colors.grey[300]!,
-                              Colors.grey[300]!,
-                            ]),
-                      ))
-                    ],
-                  ),
-                ),
+                Obx(() {
+                  var totalTodos =
+                      homeCtrl.doingTask.length + homeCtrl.doneTask.length;
+
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12.wp),
+                    child: Row(
+                      children: [
+                        Text('$totalTodos Task'),
+                        SizedBox(width: 3.wp),
+                        Expanded(
+                            child: StepProgressIndicator(
+                          totalSteps: totalTodos == 0 ? 1 : totalTodos,
+                          currentStep: homeCtrl.doneTask.length,
+                          size: 5,
+                          padding: 0,
+                          selectedGradientColor: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [color.withOpacity(0.5), color]),
+                          unselectedGradientColor: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Colors.grey[300]!,
+                                Colors.grey[300]!,
+                              ]),
+                        ))
+                      ],
+                    ),
+                  );
+                }),
                 TextFormField(
                   controller: homeCtrl.editController,
                   autofocus: true,
@@ -90,6 +103,7 @@ class DetailScreen extends StatelessWidget {
                               EasyLoading.showSuccess(AppString.todoItemExist);
                             }
                           }
+                          homeCtrl.editController.clear();
                         },
                         icon: const Icon(Icons.done)),
                   ),
