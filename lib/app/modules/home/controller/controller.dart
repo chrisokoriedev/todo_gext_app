@@ -113,4 +113,6 @@ class HomeController extends GetxController {
     tasks[oldIndex] = newTask;
     tasks.refresh();
   }
+
+  void doneTodo() {}
 }

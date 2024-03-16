@@ -18,17 +18,26 @@ class DoingTodoList extends StatelessWidget {
             shrinkWrap: true,
             physics: const ClampingScrollPhysics(),
             children: [
-              ...homeCtrl.doingTask.map((element) => Row(children: [
-                    SizedBox(
-                      width: 20.wp,
-                      height: 20.hp,
-                      child: Checkbox(
-                        value: element['done'],
-                        onChanged: (value) {},
+              ...homeCtrl.doingTask.map((element) => Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 3.wp, horizontal: 5.wp),
+                    child: Row(children: [
+                      SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: Checkbox(
+                          fillColor: MaterialStateColor.resolveWith(
+                              (states) => Colors.grey[200]!),
+                          value: element['done'],
+                          onChanged: (value) {
+                            homeCtrl.doneTodo();
+                          },
+                        ),
                       ),
-                    ),
-                    Text(element['title']),
-                  ]))
+                      SizedBox(width: 3.wp),
+                      Text(element['title']),
+                    ]),
+                  ))
             ],
           ));
   }
