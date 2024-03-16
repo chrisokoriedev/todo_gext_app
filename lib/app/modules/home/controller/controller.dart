@@ -90,5 +90,5 @@ class HomeController extends GetxController {
     }
   }
 
-  addTodo() {}
+  addTodo( String title) {}
 }

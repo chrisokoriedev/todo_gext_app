@@ -82,7 +82,8 @@ class DetailScreen extends StatelessWidget {
                     suffixIcon: IconButton(
                         onPressed: () {
                           if (homeCtrl.formKey.currentState!.validate()) {
-                            var success = homeCtrl.addTodo();
+                            var success =
+                                homeCtrl.addTodo(homeCtrl.editController.text);
                             if (success) {
                               EasyLoading.showSuccess(AppString.todoItemAdded);
                             } else {
