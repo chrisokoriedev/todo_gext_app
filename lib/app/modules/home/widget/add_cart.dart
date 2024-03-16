@@ -7,6 +7,7 @@ import 'package:todo_gext_app/app/core/value/colors.dart';
 import 'package:todo_gext_app/app/data/model/task.dart';
 import 'package:todo_gext_app/app/modules/home/controller/controller.dart';
 import 'package:todo_gext_app/app/widget/icons.dart';
+import 'package:todo_gext_app/app/widget/string_const.dart';
 
 class AddCard extends StatelessWidget {
   final homeController = Get.find<HomeController>();
@@ -25,7 +26,7 @@ class AddCard extends StatelessWidget {
             Get.defaultDialog(
                 radius: 10,
                 backgroundColor: Colors.white,
-                title: 'Task Type',
+                title: AppString.taskType,
                 titleStyle:
                     TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
                 cancel: ElevatedButton.icon(
@@ -36,7 +37,7 @@ class AddCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20))),
                     icon: const Icon(Icons.close, color: Colors.white),
                     label: Text(
-                      'Cancel',
+                      AppString.cancel,
                       style: TextStyle(fontSize: 12.sp, color: Colors.white),
                     )),
                 confirm: ElevatedButton.icon(
@@ -59,15 +60,15 @@ class AddCard extends StatelessWidget {
                             color: color);
                         Get.back();
                         homeController.addTask(task)
-                            ? EasyLoading.showSuccess('Create Success')
-                            : EasyLoading.showError('Duplicate task');
+                            ? EasyLoading.showSuccess(AppString.createSuccess)
+                            : EasyLoading.showError(AppString.duplicateTask);
                       }
                       homeController.chipIndex(0);
                       homeController.editController.clear();
                     },
                     icon: const Icon(Icons.check, color: Colors.white),
                     label: Text(
-                      'Create',
+                      AppString.create,
                       style: TextStyle(fontSize: 12.sp, color: Colors.white),
                     )),
                 content: Form(
@@ -81,7 +82,7 @@ class AddCard extends StatelessWidget {
                                 controller: homeController.editController,
                                 validator: (text) {
                                   if (text!.isEmpty) {
-                                    return 'Enter task title';
+                                    return AppString.enterTaskTitle;
                                   }
                                   return null;
                                 })),

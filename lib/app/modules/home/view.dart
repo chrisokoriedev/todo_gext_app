@@ -6,6 +6,7 @@ import 'package:todo_gext_app/app/modules/home/controller/controller.dart';
 import 'package:todo_gext_app/app/core/utlls/extensions.dart';
 import 'package:todo_gext_app/app/modules/home/widget/add_cart.dart';
 import 'package:todo_gext_app/app/modules/home/widget/add_dialog.dart';
+import 'package:todo_gext_app/app/widget/string_const.dart';
 
 import 'widget/task_card.dart';
 
@@ -17,8 +18,8 @@ class MyHomePage extends GetView<HomeController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'My Tasks',
-          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+          AppString.myTask,
+          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
         ),
       ),
       body: SafeArea(
@@ -45,7 +46,9 @@ class MyHomePage extends GetView<HomeController> {
                             child: TaskCard(task: element)),
                       )
                       .toList(),
-                  AddCard()
+                  controller.tasks.length <= 10
+                      ? AddCard()
+                      : const SizedBox.shrink()
                 ],
               ),
             ],
@@ -54,10 +57,6 @@ class MyHomePage extends GetView<HomeController> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: DragTarget<TaskModel>(
-        onAccept: (TaskModel task) {
-          controller.deleteTask(task);
-          EasyLoading.showSuccess('Deleted Task');
-        },
         builder: (_, __, ___) {
           return Obx(
             () => FloatingActionButton(
@@ -65,18 +64,26 @@ class MyHomePage extends GetView<HomeController> {
                   ? Colors.red[400]
                   : Colors.purple[100],
               onPressed: () {
-                if (controller.tasks.isEmpty) {
+                if (controller.tasks.isNotEmpty) {
                   Get.to(AddDialog(),
                       transition: Transition.downToUp,
                       duration: const Duration(milliseconds: 450));
+                } else {
+                  EasyLoading.showInfo(AppString.createTaskType);
                 }
               },
               child: Icon(
                 controller.deleting.value ? Icons.delete : Icons.add,
                 color: Colors.white,
+                size: 30,
               ),
             ),
           );
+        },
+        onAccept: (TaskModel task) {
+          controller.deleteTask(task);
+          controller.task.refresh();
+          EasyLoading.showSuccess(AppString.deletedTask);
         },
       ),
     );
