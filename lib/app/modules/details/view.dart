@@ -99,7 +99,7 @@ class DetailScreen extends StatelessWidget {
                 }),
                 TextFormField(
                   controller: homeCtrl.editController,
-                 textInputAction: TextInputAction.continueAction,
+                 textInputAction: TextInputAction.done,
                   autofocus: true,
                   onFieldSubmitted: (value) {
                     submit();
