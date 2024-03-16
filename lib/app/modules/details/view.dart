@@ -14,6 +14,18 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void submit() {
+      if (homeCtrl.formKey.currentState!.validate()) {
+        var success = homeCtrl.addTodo(homeCtrl.editController.text);
+        if (success) {
+          EasyLoading.showSuccess(AppString.todoItemAdded);
+        } else {
+          EasyLoading.showSuccess(AppString.todoItemExist);
+        }
+      }
+      homeCtrl.editController.clear();
+    }
+
     var task = homeCtrl.task.value;
     var color = HexColor.fromHex(task!.color);
     return Scaffold(
@@ -87,26 +99,18 @@ class DetailScreen extends StatelessWidget {
                 }),
                 TextFormField(
                   controller: homeCtrl.editController,
+                 textInputAction: TextInputAction.continueAction,
                   autofocus: true,
+                  onFieldSubmitted: (value) {
+                    submit();
+                  },
                   decoration: InputDecoration(
                     focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.grey[300]!)),
                     prefixIcon: Icon(Icons.check_box_outline_blank,
                         color: Colors.grey[400]),
                     suffixIcon: IconButton(
-                        onPressed: () {
-                          if (homeCtrl.formKey.currentState!.validate()) {
-                            var success =
-                                homeCtrl.addTodo(homeCtrl.editController.text);
-                            if (success) {
-                              EasyLoading.showSuccess(AppString.todoItemAdded);
-                            } else {
-                              EasyLoading.showSuccess(AppString.todoItemExist);
-                            }
-                          }
-                          homeCtrl.editController.clear();
-                        },
-                        icon: const Icon(Icons.done)),
+                        onPressed: submit, icon: const Icon(Icons.done)),
                   ),
                   validator: (text) {
                     if (text!.trim().isEmpty) {

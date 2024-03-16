@@ -37,7 +37,14 @@ class DoingTodoList extends StatelessWidget {
                       SizedBox(width: 3.wp),
                       Text(element['title']),
                     ]),
-                  ))
+                  )).toList(),
+                  if(homeCtrl.doingTodos.isEmpty)
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Divider(thickness: 2),
+                    ],
+                  ),
             ],
           ));
   }
