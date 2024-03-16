@@ -23,6 +23,8 @@ class DetailScreen extends StatelessWidget {
           EasyLoading.showSuccess(AppString.todoItemExist);
         }
       }
+      homeCtrl.updateTodo();
+      homeCtrl.changeTask(null);
       homeCtrl.editController.clear();
     }
 
@@ -99,7 +101,7 @@ class DetailScreen extends StatelessWidget {
                 }),
                 TextFormField(
                   controller: homeCtrl.editController,
-                 textInputAction: TextInputAction.done,
+                  textInputAction: TextInputAction.done,
                   autofocus: true,
                   onFieldSubmitted: (value) {
                     submit();
