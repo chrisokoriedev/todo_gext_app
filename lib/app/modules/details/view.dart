@@ -6,6 +6,8 @@ import 'package:todo_gext_app/app/core/utlls/extensions.dart';
 import 'package:todo_gext_app/app/modules/home/controller/controller.dart';
 import 'package:todo_gext_app/app/widget/string_const.dart';
 
+import 'widget/doing_list.dart';
+
 class DetailScreen extends StatelessWidget {
   final homeCtrl = Get.find<HomeController>();
   DetailScreen({super.key});
@@ -116,6 +118,7 @@ class DetailScreen extends StatelessWidget {
               ],
             ),
           ),
+          DoingTodoList()
         ],
       ),
     ));
