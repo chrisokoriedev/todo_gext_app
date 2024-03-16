@@ -55,7 +55,6 @@ class DetailScreen extends StatelessWidget {
                 Obx(() {
                   var totalTodos =
                       homeCtrl.doingTask.length + homeCtrl.doneTask.length;
-
                   return Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12.wp),
                     child: Row(

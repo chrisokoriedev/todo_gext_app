@@ -13,8 +13,8 @@ class HomeController extends GetxController {
   final chipIndex = 0.obs;
   final deleting = false.obs;
   final editController = TextEditingController();
-  final doingTask = <dynamic>[];
-  final doneTask = <dynamic>[];
+  final doingTask = <dynamic>[].obs;
+  final doneTask = <dynamic>[].obs;
   @override
   void onInit() {
     super.onInit();
