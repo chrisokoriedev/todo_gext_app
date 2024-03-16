@@ -18,33 +18,32 @@ class DoingTodoList extends StatelessWidget {
             shrinkWrap: true,
             physics: const ClampingScrollPhysics(),
             children: [
-              ...homeCtrl.doingTodos.map((element) => Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 3.wp, horizontal: 5.wp),
-                    child: Row(children: [
-                      SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: Checkbox(
-                          fillColor: MaterialStateColor.resolveWith(
-                              (states) => Colors.grey[200]!),
-                          value: element['done'],
-                          onChanged: (value) {
-                            homeCtrl.doneTodo(element['title']);
-                          },
-                        ),
-                      ),
-                      SizedBox(width: 3.wp),
-                      Text(element['title']),
-                    ]),
-                  )).toList(),
-                  if(homeCtrl.doingTodos.isEmpty)
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Divider(thickness: 2),
-                    ],
-                  ),
+              ...homeCtrl.doingTodos
+                  .map((element) => Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 3.wp, horizontal: 5.wp),
+                        child: Row(children: [
+                          SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: Checkbox(
+                              fillColor: MaterialStateColor.resolveWith(
+                                  (states) => Colors.grey[200]!),
+                              value: element['done'],
+                              onChanged: (value) {
+                                homeCtrl.doneTodo(element['title']);
+                              },
+                            ),
+                          ),
+                          SizedBox(width: 3.wp),
+                          Text(element['title']),
+                        ]),
+                      ))
+                  .toList(),
+              if (homeCtrl.doingTodos.isNotEmpty)
+                Container(
+                    padding: EdgeInsets.only(left: 10.wp),
+                    child: const Divider(thickness: 2)),
             ],
           ));
   }
