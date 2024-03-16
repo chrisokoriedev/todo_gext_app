@@ -8,6 +8,7 @@ class AppString {
   static const String myTask = 'My Tasks';
   static const String taskType = 'Task Type';
   static const String addTo = "Add to";
+  static const String addTodo = 'Add Todo';
   static const String todoItemAdded = "Todo item added successfully";
   static const String todoItemExist = "Todo item already exist";
   static const String materialIcons = "MaterialIcons";
