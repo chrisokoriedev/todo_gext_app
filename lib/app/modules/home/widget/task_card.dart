@@ -18,6 +18,7 @@ class TaskCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         homeCtrl.changeTask(task);
+        homeCtrl.changeTodos(task.todoList ?? []);
         Get.to(DetailScreen());
       },
       child: Container(

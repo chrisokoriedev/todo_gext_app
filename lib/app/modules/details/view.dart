@@ -12,20 +12,40 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var task = homeCtrl.task.value;
     var color = HexColor.fromHex(task!.color);
-
+    var totalTodos = homeCtrl.doingTask.length + homeCtrl.doneTask.length;
     return Scaffold(
         body: ListView(
       children: [
         Padding(
-          padding: EdgeInsets.all(3.wp),
-          child: const Align(alignment: Alignment.topLeft, child: BackButton()),
+          padding: EdgeInsets.symmetric(horizontal: 2.wp, vertical: 3.wp),
+          child: Column(
+            children: [
+              const Align(alignment: Alignment.topLeft, child: BackButton()),
+              SizedBox(height: 2.hp),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 4.wp),
+                child: Row(
+                  children: [
+                    Icon(
+                        IconData(task.icon,
+                            fontFamily: AppString.materialIcons),
+                        color: color),
+                    SizedBox(width: 2.wp),
+                    Text(
+                      task.title,
+                      style: TextStyle(
+                          fontSize: 12.sp, fontWeight: FontWeight.w600),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(height: 2.hp),
+              Row(
+                children: [Text('$totalTodos Task')],
+              )
+            ],
+          ),
         ),
-        Row(
-          children: [
-            Icon(IconData(task.icon, fontFamily: AppString.materialIcons),
-                color: color),
-          ],
-        )
       ],
     ));
   }

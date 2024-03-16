@@ -12,6 +12,8 @@ class HomeController extends GetxController {
   final chipIndex = 0.obs;
   final deleting = false.obs;
   final editController = TextEditingController();
+  final doingTask = <dynamic>[];
+  final doneTask = <dynamic>[];
   @override
   void onInit() {
     super.onInit();
@@ -72,5 +74,19 @@ class HomeController extends GetxController {
     }
     tasks.add(task);
     return true;
+  }
+
+  void changeTodos(List<dynamic> select) {
+    doingTask.clear();
+    doneTask.clear();
+    for (int element = 0; element < select.length; element++) {
+      var todo = select[element];
+      var status = todo['done'];
+      if (status == true) {
+        doneTask.add(todo);
+      } else {
+        doingTask.add(todo);
+      }
+    }
   }
 }

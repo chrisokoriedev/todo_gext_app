@@ -46,7 +46,9 @@ class MyHomePage extends GetView<HomeController> {
                             child: TaskCard(task: element)),
                       )
                       .toList(),
-                  AddCard()
+                  controller.tasks.length <= 10
+                      ? AddCard()
+                      : const SizedBox.shrink()
                 ],
               ),
             ],
