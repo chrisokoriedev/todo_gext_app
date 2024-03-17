@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:todo_gext_app/app/core/utlls/extensions.dart';
+import 'package:todo_gext_app/app/modules/details/widget/done_list.dart';
 import 'package:todo_gext_app/app/modules/home/controller/controller.dart';
 import 'package:todo_gext_app/app/widget/string_const.dart';
 
@@ -124,7 +125,8 @@ class DetailScreen extends StatelessWidget {
               ],
             ),
           ),
-          DoingTodoList()
+          DoingTodoList(),
+          DoneTodoList(),
         ],
       ),
     ));

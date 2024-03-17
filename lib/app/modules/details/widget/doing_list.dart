@@ -44,7 +44,7 @@ class DoingTodoList extends StatelessWidget {
                             ),
                           ),
                           SizedBox(width: 3.wp),
-                          Text(element['title']),
+                          Text(element['title'],overflow: TextOverflow.ellipsis,),
                         ]),
                       ))
                   .toList(),
