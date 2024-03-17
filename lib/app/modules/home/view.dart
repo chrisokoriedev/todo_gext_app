@@ -24,12 +24,16 @@ class MyHomePage extends GetView<HomeController> {
           style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
         ),
         actions: [
-          IconButton(
-              onPressed: () {
-                themeController.switchTheme();
-                Get.changeThemeMode(themeController.currentTheme.value);
-              },
-              icon: const Icon(Icons.light_mode)),
+          Obx(
+            () => IconButton(
+                onPressed: () {
+                  themeController.switchTheme();
+                  Get.changeThemeMode(themeController.currentTheme.value);
+                },
+                icon: Icon(themeController.currentTheme.value == ThemeMode.light
+                    ? Icons.light_mode
+                    : Icons.dark_mode)),
+          ),
         ],
       ),
       body: SafeArea(

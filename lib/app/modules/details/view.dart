@@ -24,9 +24,6 @@ class DetailScreen extends StatelessWidget {
           EasyLoading.showSuccess(AppString.todoItemExist);
         }
       }
-      homeCtrl.updateTodo();
-      homeCtrl.changeTask(null);
-      homeCtrl.editController.clear();
     }
 
     var task = homeCtrl.task.value;
