@@ -39,8 +39,7 @@ class DoneTodoList extends StatelessWidget {
                           child: const Icon(Icons.delete, color: Colors.white),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 3.wp, horizontal: 5.wp),
+                          padding: EdgeInsets.symmetric(horizontal: 2.wp),
                           child: Row(children: [
                             IconButton(
                               onPressed: () =>
