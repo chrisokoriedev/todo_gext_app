@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:todo_gext_app/app/core/utlls/extensions.dart';
 import 'package:todo_gext_app/app/modules/home/controller/controller.dart';
@@ -11,7 +12,7 @@ class DoneTodoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => homeCtrl.doneTodos.isEmpty && homeCtrl.doneTodos.isEmpty
-        ? const Text(AppString.addTodo)
+        ? const SizedBox()
         : ListView(
             physics: const ClampingScrollPhysics(),
             shrinkWrap: true,
@@ -27,8 +28,10 @@ class DoneTodoList extends StatelessWidget {
                   .map((element) => Dismissible(
                         key: ObjectKey(element),
                         direction: DismissDirection.endToStart,
-                        onDismissed: (_) =>
-                            homeCtrl.deleteDoneTodo(element['title']),
+                        onDismissed: (_) {
+                          homeCtrl.deleteDoneTodo(element['title']);
+                          EasyLoading.showSuccess(AppString.todoItemDeleted);
+                        },
                         background: Container(
                           color: Colors.red[700],
                           alignment: Alignment.centerRight,
@@ -39,7 +42,11 @@ class DoneTodoList extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               vertical: 3.wp, horizontal: 5.wp),
                           child: Row(children: [
-                             Icon(Icons.check_box, color: Colors.blue,size: 15.sp,),
+                            Icon(
+                              Icons.check_box,
+                              color: Colors.blue,
+                              size: 15.sp,
+                            ),
                             SizedBox(width: 3.wp),
                             Text(
                               element['title'],
