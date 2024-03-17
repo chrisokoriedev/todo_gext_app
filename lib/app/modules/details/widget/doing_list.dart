@@ -13,7 +13,9 @@ class DoingTodoList extends StatelessWidget {
     return Obx(() => homeCtrl.doingTodos.isEmpty && homeCtrl.doneTodos.isEmpty
         ? Column(
             children: [
-              Image.asset(AppString.imageUrl),
+              SizedBox(height: 3.hp),
+              SizedBox(width: 300, child: Image.asset(AppString.imageUrl)),
+              SizedBox(height: 3.hp),
               Text(
                 AppString.addTodo,
                 style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500),
