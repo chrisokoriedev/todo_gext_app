@@ -105,6 +105,7 @@ class DetailScreen extends StatelessWidget {
                   textInputAction: TextInputAction.done,
                   autofocus: true,
                   onFieldSubmitted: (value) {
+                    homeCtrl.editController.clear();
                     submit();
                   },
                   decoration: InputDecoration(
@@ -113,7 +114,11 @@ class DetailScreen extends StatelessWidget {
                     prefixIcon: Icon(Icons.check_box_outline_blank,
                         color: Colors.grey[400]),
                     suffixIcon: IconButton(
-                        onPressed: submit, icon: const Icon(Icons.done)),
+                        onPressed: () {
+                          submit();
+                          homeCtrl.editController.clear();
+                        },
+                        icon: const Icon(Icons.done)),
                   ),
                   validator: (text) {
                     if (text!.trim().isEmpty) {
