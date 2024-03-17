@@ -16,30 +16,39 @@ class DoneTodoList extends StatelessWidget {
             physics: const ClampingScrollPhysics(),
             shrinkWrap: true,
             children: [
-              Text(
-                'Completed\t${homeCtrl.doneTodos.length}',
-                style: TextStyle(fontSize: 14.sp, color: Colors.grey),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5.wp, vertical: 2.wp),
+                child: Text(
+                  'Completed\t${homeCtrl.doneTodos.length}',
+                  style: TextStyle(fontSize: 14.sp, color: Colors.grey),
+                ),
               ),
               ...homeCtrl.doneTodos
-                  .map((element) => Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 3.wp, horizontal: 5.wp),
-                        child: Row(children: [
-                          SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: Checkbox(
-                              fillColor: MaterialStateColor.resolveWith(
-                                  (states) => Colors.grey[200]!),
-                              value: element['done'],
-                              onChanged: (value) {
-                                homeCtrl.doneTodo(element['title']);
-                              },
+                  .map((element) => Dismissible(
+                        key: ObjectKey(element),
+                        direction: DismissDirection.endToStart,
+                        onDismissed: (_) =>
+                            homeCtrl.deleteDoneTodo(element['title']),
+                        background: Container(
+                          color: Colors.red[700],
+                          alignment: Alignment.centerRight,
+                          padding: EdgeInsets.only(right: 5.wp),
+                          child: const Icon(Icons.delete, color: Colors.white),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 3.wp, horizontal: 5.wp),
+                          child: Row(children: [
+                            const Icon(Icons.check_box, color: Colors.blue),
+                            SizedBox(width: 3.wp),
+                            Text(
+                              element['title'],
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  decoration: TextDecoration.lineThrough),
                             ),
-                          ),
-                          SizedBox(width: 3.wp),
-                          Text(element['title'],overflow: TextOverflow.ellipsis,),
-                        ]),
+                          ]),
+                        ),
                       ))
                   .toList()
             ],
