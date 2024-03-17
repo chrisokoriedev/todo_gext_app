@@ -17,4 +17,5 @@ class AppString {
   static const String createSuccess = "Create Successfully";
   static const String duplicateTask = "Duplicate task";
   static const String enterTaskTitle = "Enter task title";
+  static const String imageUrl = 'assets/task.png';
 }

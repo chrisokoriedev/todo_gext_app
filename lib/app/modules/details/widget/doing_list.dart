@@ -11,8 +11,14 @@ class DoingTodoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => homeCtrl.doingTodos.isEmpty && homeCtrl.doneTodos.isEmpty
-        ? const Column(
-            children: [Placeholder(), Text(AppString.addTodo)],
+        ? Column(
+            children: [
+              Image.asset(AppString.imageUrl),
+              Text(
+                AppString.addTodo,
+                style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500),
+              )
+            ],
           )
         : ListView(
             shrinkWrap: true,
