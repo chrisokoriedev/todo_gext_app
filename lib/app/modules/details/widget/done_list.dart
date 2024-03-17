@@ -47,7 +47,7 @@ class DoneTodoList extends StatelessWidget {
                               icon: Icon(
                                 Icons.check_box,
                                 color: Colors.blue,
-                                size: 15.sp,
+                                size: 18.sp,
                               ),
                             ),
                             SizedBox(width: 3.wp),

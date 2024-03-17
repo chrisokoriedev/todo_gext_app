@@ -32,8 +32,8 @@ class DoingTodoList extends StatelessWidget {
                             vertical: 3.wp, horizontal: 5.wp),
                         child: Row(children: [
                           SizedBox(
-                            width: 20,
-                            height: 20,
+                            width: 25,
+                            height: 25,
                             child: Checkbox(
                               fillColor: MaterialStateColor.resolveWith(
                                   (states) => Colors.grey[200]!),
