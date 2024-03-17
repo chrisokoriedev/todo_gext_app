@@ -42,10 +42,14 @@ class DoneTodoList extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               vertical: 3.wp, horizontal: 5.wp),
                           child: Row(children: [
-                            Icon(
-                              Icons.check_box,
-                              color: Colors.blue,
-                              size: 15.sp,
+                            IconButton(
+                              onPressed: () =>
+                                  homeCtrl.unCheckTodo(element['title']),
+                              icon: Icon(
+                                Icons.check_box,
+                                color: Colors.blue,
+                                size: 15.sp,
+                              ),
                             ),
                             SizedBox(width: 3.wp),
                             Text(
