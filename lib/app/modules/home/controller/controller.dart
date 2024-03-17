@@ -128,10 +128,9 @@ class HomeController extends GetxController {
 
   deleteDoneTodo(String title) {
     var doneTodo = {'title': title, 'done': true};
-    var index = doingTodos
+    var index = doneTodos
         .indexWhere((element) => mapEquals<String, dynamic>(doneTodo, element));
     doneTodos.removeAt(index);
-    doingTodos.refresh();
     doneTodos.refresh();
   }
 }
