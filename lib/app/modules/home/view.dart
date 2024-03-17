@@ -21,6 +21,13 @@ class MyHomePage extends GetView<HomeController> {
           AppString.myTask,
           style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
         ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Get.changeTheme(ThemeData.dark());
+              },
+              icon: const Icon(Icons.light_mode))
+        ],
       ),
       body: SafeArea(
         child: Obx(
