@@ -12,22 +12,22 @@ import 'app/modules/home/controller/theme.dart';
 Future<void> main() async {
   await GetStorage.init();
   await Get.putAsync(() => StorageService().init());
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final ThemeController themeController = Get.put(ThemeController());
+
+   MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ThemeController themeController = Get.put(ThemeController());
-
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Todo App',
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: ThemeMode.system,
+      themeMode:themeController.currentTheme.value,
       home: MyHomePage(),
       initialBinding: HomeBiniding(),
       builder: EasyLoading.init(),

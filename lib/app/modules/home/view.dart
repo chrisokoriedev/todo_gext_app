@@ -29,7 +29,7 @@ class MyHomePage extends GetView<HomeController> {
                 themeController.switchTheme();
                 Get.changeThemeMode(themeController.currentTheme.value);
               },
-              icon: const Icon(Icons.light_mode))
+              icon: const Icon(Icons.light_mode)),
         ],
       ),
       body: SafeArea(

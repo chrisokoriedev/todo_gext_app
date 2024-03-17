@@ -15,6 +15,7 @@ class HomeController extends GetxController {
   final editController = TextEditingController();
   final doingTodos = <dynamic>[].obs;
   final doneTodos = <dynamic>[].obs;
+  
   @override
   void onInit() {
     super.onInit();
