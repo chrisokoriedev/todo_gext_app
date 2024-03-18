@@ -13,8 +13,9 @@ class HomeController extends GetxController {
   final chipIndex = 0.obs;
   final deleting = false.obs;
   final editController = TextEditingController();
-  final doingTask = <dynamic>[].obs;
-  final doneTask = <dynamic>[].obs;
+  final doingTodos = <dynamic>[].obs;
+  final doneTodos = <dynamic>[].obs;
+  
   @override
   void onInit() {
     super.onInit();
@@ -78,39 +79,84 @@ class HomeController extends GetxController {
   }
 
   void changeTodos(List<dynamic> select) {
-    doingTask.clear();
-    doneTask.clear();
+    doingTodos.clear();
+    doneTodos.clear();
     for (int element = 0; element < select.length; element++) {
       var todo = select[element];
       var status = todo['done'];
       if (status == true) {
-        doneTask.add(todo);
+        doneTodos.add(todo);
       } else {
-        doingTask.add(todo);
+        doingTodos.add(todo);
       }
     }
   }
 
   bool addTodo(String title) {
     var todo = {'title': title, 'done': false};
-    if (doingTask.any((element) => mapEquals<String, dynamic>(todo, element))) {
+    if (doingTodos
+        .any((element) => mapEquals<String, dynamic>(todo, element))) {
       return false;
     }
     var doneTodo = {'title': title, 'done': true};
-    if (doneTask
+    if (doneTodos
         .any((element) => mapEquals<String, dynamic>(doneTodo, element))) {
       return false;
     }
-    doingTask.add(todo);
+    doingTodos.add(todo);
     return true;
   }
 
   void updateTodo() {
     var newTodos = <Map<String, dynamic>>[];
-    newTodos.addAll([...doingTask, ...doneTask]);
+    newTodos.addAll([...doingTodos, ...doneTodos]);
     var newTask = task.value!.copywith(todoList: newTodos);
     int oldIndex = tasks.indexOf(task.value);
     tasks[oldIndex] = newTask;
     tasks.refresh();
+  }
+
+  void doneTodo(String title) {
+    var doingTodo = {'title': title, 'done': false};
+    var index = doingTodos.indexWhere(
+        (element) => mapEquals<String, dynamic>(doingTodo, element));
+    doingTodos.removeAt(index);
+    var doneTodo = {'title': title, 'done': true};
+    doneTodos.add(doneTodo);
+    doingTodos.refresh();
+    doneTodos.refresh();
+  }
+
+  void unCheckTodo(String title) {
+    var doneTodo = {'title': title, 'done': true};
+    var index = doneTodos
+        .indexWhere((element) => mapEquals<String, dynamic>(doneTodo, element));
+    doneTodos.removeAt(index);
+    var newDoingTodo = {'title': title, 'done': false};
+    doingTodos.add(newDoingTodo);
+    doingTodos.refresh();
+    doneTodos.refresh();
+  }
+
+  deleteDoneTodo(String title) {
+    var doneTodo = {'title': title, 'done': true};
+    var index = doneTodos
+        .indexWhere((element) => mapEquals<String, dynamic>(doneTodo, element));
+    doneTodos.removeAt(index);
+    doneTodos.refresh();
+  }
+
+  bool isTodosEmpty(TaskModel task) {
+    return task.todoList == null || task.todoList!.isEmpty;
+  }
+
+  int getDoneTodo(TaskModel task) {
+    var res = 0;
+    for (var i = 0; i < task.todoList!.length; i++) {
+      if (task.todoList![i]['done'] == true) {
+        res += 1;
+      }
+    }
+    return res;
   }
 }

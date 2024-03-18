@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:todo_gext_app/app/data/model/task.dart';
 import 'package:todo_gext_app/app/modules/home/controller/controller.dart';
 import 'package:todo_gext_app/app/core/utlls/extensions.dart';
+import 'package:todo_gext_app/app/modules/home/controller/theme.dart';
 import 'package:todo_gext_app/app/modules/home/widget/add_cart.dart';
 import 'package:todo_gext_app/app/modules/home/widget/add_dialog.dart';
 import 'package:todo_gext_app/app/widget/string_const.dart';
@@ -11,7 +12,8 @@ import 'package:todo_gext_app/app/widget/string_const.dart';
 import 'widget/task_card.dart';
 
 class MyHomePage extends GetView<HomeController> {
-  const MyHomePage({super.key});
+  final ThemeController themeController = Get.find();
+  MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,18 @@ class MyHomePage extends GetView<HomeController> {
           AppString.myTask,
           style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
         ),
+        actions: [
+          Obx(
+            () => IconButton(
+                onPressed: () {
+                  themeController.switchTheme();
+                  Get.changeThemeMode(themeController.currentTheme.value);
+                },
+                icon: Icon(themeController.currentTheme.value == ThemeMode.light
+                    ? Icons.light_mode
+                    : Icons.dark_mode)),
+          ),
+        ],
       ),
       body: SafeArea(
         child: Obx(
