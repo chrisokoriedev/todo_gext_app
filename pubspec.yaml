@@ -22,6 +22,8 @@ dependencies:
   flutter_easyloading:
   dotted_border:
   step_progress_indicator:
+  firebase_core:
+  firebase_auth:
 
 dev_dependencies:
   flutter_test:
