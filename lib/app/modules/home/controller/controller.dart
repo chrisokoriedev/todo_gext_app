@@ -12,6 +12,7 @@ class HomeController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final chipIndex = 0.obs;
   final currentIndex = 0.obs;
+  PageController? pageCtrl;
   final deleting = false.obs;
   final editController = TextEditingController();
   final doingTodos = <dynamic>[].obs;
@@ -22,6 +23,7 @@ class HomeController extends GetxController {
     super.onInit();
     tasks.assignAll(taskRepository.readTask());
     ever(tasks, (_) => taskRepository.writeTask(tasks));
+    pageCtrl = PageController(initialPage: currentIndex.value);
   }
 
   @override
@@ -34,11 +36,13 @@ class HomeController extends GetxController {
   @override
   void dispose() {
     editController.dispose();
+    pageCtrl!.dispose();
     super.dispose();
   }
 
   void changeIndex(int index) {
     currentIndex.value = index;
+    pageCtrl!.jumpToPage(index);
   }
 
   void chnageChipdIndex(int value) {
@@ -115,7 +119,7 @@ class HomeController extends GetxController {
   void updateTodo() {
     var newTodos = <Map<String, dynamic>>[];
     newTodos.addAll([...doingTodos, ...doneTodos]);
-    var newTask = task.value !.copywith(todoList: newTodos);
+    var newTask = task.value!.copywith(todoList: newTodos);
     int oldIndex = tasks.indexOf(task.value);
     tasks[oldIndex] = newTask;
     tasks.refresh();
@@ -169,7 +173,7 @@ class HomeController extends GetxController {
     var res = 0;
     for (var i = 0; i < tasks.length; i++) {
       if (tasks[i].todoList != null) {
-       res += tasks[i].todoList!.length;
+        res += tasks[i].todoList!.length;
       }
     }
     return res;

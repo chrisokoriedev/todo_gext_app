@@ -44,41 +44,40 @@ class MyHomePage extends GetView<HomeController> {
             ),
           ],
         ),
-        body: IndexedStack(
-          index: controller.currentIndex.value,
+        body: PageView(
+          controller: controller.pageCtrl,
+          onPageChanged: (index) => controller.changeIndex(index),
           children: [
-            SafeArea(
-              child: ListView(
-                padding: EdgeInsets.all(4.wp),
-                children: [
-                  GridView.count(
-                    crossAxisCount: 2,
-                    physics: const ClampingScrollPhysics(),
-                    shrinkWrap: true,
-                    children: [
-                      ...controller.tasks
-                          .map(
-                            (element) => LongPressDraggable(
-                                data: element,
-                                onDragStarted: () =>
-                                    controller.changeDeleting(true),
-                                onDraggableCanceled: (_, __) =>
-                                    controller.changeDeleting(false),
-                                onDragEnd: (_) =>
-                                    controller.changeDeleting(true),
-                                feedback: Opacity(
-                                    opacity: 0.4,
-                                    child: TaskCard(task: element)),
-                                child: TaskCard(task: element)),
-                          )
-                          .toList(),
-                      controller.tasks.length <= 10
-                          ? AddCard()
-                          : const SizedBox.shrink()
-                    ],
-                  ),
-                ],
-              ),
+            ListView(
+              padding: EdgeInsets.all(4.wp),
+              children: [
+                GridView.count(
+                  crossAxisCount: 2,
+                  physics: const ClampingScrollPhysics(),
+                  shrinkWrap: true,
+                  children: [
+                    ...controller.tasks
+                        .map(
+                          (element) => LongPressDraggable(
+                              data: element,
+                              onDragStarted: () =>
+                                  controller.changeDeleting(true),
+                              onDraggableCanceled: (_, __) =>
+                                  controller.changeDeleting(false),
+                              onDragEnd: (_) =>
+                                  controller.changeDeleting(true),
+                              feedback: Opacity(
+                                  opacity: 0.4,
+                                  child: TaskCard(task: element)),
+                              child: TaskCard(task: element)),
+                        )
+                        .toList(),
+                    controller.tasks.length <= 10
+                        ? AddCard()
+                        : const SizedBox.shrink()
+                  ],
+                ),
+              ],
             ),
             ReportScreen(),
           ],
