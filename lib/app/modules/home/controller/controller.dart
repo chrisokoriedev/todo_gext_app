@@ -171,7 +171,7 @@ class HomeController extends GetxController {
       if (tasks[i].todoList != null) {
         for (var j = 0; j < tasks[i].todoList!.length; j++) {
           if (tasks[i].todoList![j]['done'] == true) {
-            
+            res += 1;
           }
         }
       }
