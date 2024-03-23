@@ -94,7 +94,7 @@ class AddCard extends StatelessWidget {
                                 .map((e) => Obx(() {
                                       final index = iconData.indexOf(e);
                                       return ChoiceChip(
-                                          selectedColor: theme.tertiary,
+                                          selectedColor: theme.onTertiary,
                                           elevation: 0,
                                           side: BorderSide.none,
                                           label: e,
