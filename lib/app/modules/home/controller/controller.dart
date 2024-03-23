@@ -11,11 +11,12 @@ class HomeController extends GetxController {
   final task = Rx<TaskModel?>(null);
   final formKey = GlobalKey<FormState>();
   final chipIndex = 0.obs;
+  final currentIndex = 0.obs;
   final deleting = false.obs;
   final editController = TextEditingController();
   final doingTodos = <dynamic>[].obs;
   final doneTodos = <dynamic>[].obs;
-  
+
   @override
   void onInit() {
     super.onInit();
@@ -34,6 +35,10 @@ class HomeController extends GetxController {
   void dispose() {
     editController.dispose();
     super.dispose();
+  }
+
+  void changeIndex(int index) {
+    currentIndex.value = index;
   }
 
   void chnageChipdIndex(int value) {
