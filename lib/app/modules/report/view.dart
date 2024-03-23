@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:todo_gext_app/app/core/utlls/extensions.dart';
 import 'package:todo_gext_app/app/modules/home/controller/controller.dart';
 
 class ReportScreen extends StatelessWidget {
@@ -16,8 +18,16 @@ class ReportScreen extends StatelessWidget {
           var liveTask = createdTasks - completedTask;
           var getPercent =
               (completedTask / createdTasks * 100).toStringAsFixed(0);
-          return Column(
-            children: [],
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 4.wp, vertical: 5.wp),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  DateFormat.yMMMMd().format(DateTime.now()),
+                ),
+              ],
+            ),
           );
         }),
       ],

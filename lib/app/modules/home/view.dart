@@ -22,6 +22,7 @@ class MyHomePage extends GetView<HomeController> {
 
     return Obx(
       () => Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(
             controller.currentIndex.value == 0
