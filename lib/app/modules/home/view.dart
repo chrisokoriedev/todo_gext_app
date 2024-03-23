@@ -79,7 +79,7 @@ class MyHomePage extends GetView<HomeController> {
                 ],
               ),
             ),
-            const ReportScreen(),
+            ReportScreen(),
           ],
         ),
         floatingActionButtonLocation:
