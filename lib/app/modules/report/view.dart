@@ -55,6 +55,24 @@ class ReportScreen extends StatelessWidget {
                         padding: 0,
                         selectedStepSize: 18,
                         roundedCap: (_, __) => true,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              '${createdTasks == 0 ? 0 : getPercent}%',
+                              style: TextStyle(
+                                  fontSize: 20.sp, fontWeight: FontWeight.w600),
+                            ),
+                            Text(
+                              'Efficency',
+                              style: TextStyle(
+                                  fontSize: 12.sp,
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

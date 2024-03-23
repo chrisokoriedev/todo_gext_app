@@ -119,11 +119,20 @@ class MyHomePage extends GetView<HomeController> {
           onTap: (index) => controller.changeIndex(index),
           currentIndex: controller.currentIndex.value,
           showUnselectedLabels: false,
-          items: const [
+          selectedIconTheme: IconThemeData(color: theme.primary),
+          items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.grid_4x4_outlined), label: 'Home'),
+                icon: Padding(
+                  padding: EdgeInsets.only(right: 20.wp),
+                  child: const Icon(Icons.grid_4x4_outlined),
+                ),
+                label: ''),
             BottomNavigationBarItem(
-                icon: Icon(Icons.data_usage), label: 'Report'),
+                icon: Padding(
+                  padding: EdgeInsets.only(left: 20.wp),
+                  child: const Icon(Icons.data_usage),
+                ),
+                label: ''),
           ],
         ),
       ),
