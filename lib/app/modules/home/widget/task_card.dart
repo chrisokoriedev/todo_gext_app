@@ -15,6 +15,8 @@ class TaskCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final Color color = HexColor.fromHex(task.color);
     final squareWidth = Get.width - 12.wp;
+    final theme = Theme.of(context).colorScheme;
+
     return GestureDetector(
       onTap: () {
         homeCtrl.changeTask(task);
@@ -25,9 +27,9 @@ class TaskCard extends StatelessWidget {
         width: squareWidth / 2,
         height: squareWidth / 2,
         margin: EdgeInsets.all(3.wp),
-        decoration: BoxDecoration(color: Colors.white, boxShadow: [
+        decoration: BoxDecoration(color: theme.primaryContainer, boxShadow: [
           BoxShadow(
-              color: Colors.grey[300]!,
+              color: theme.shadow,
               blurRadius: 7,
               offset: const Offset(0, 7))
         ]),
