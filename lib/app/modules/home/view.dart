@@ -18,6 +18,8 @@ class MyHomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
+
     return Obx(
       () => Scaffold(
         appBar: AppBar(
@@ -88,7 +90,7 @@ class MyHomePage extends GetView<HomeController> {
               () => FloatingActionButton(
                 backgroundColor: controller.deleting.value
                     ? Colors.red[400]
-                    : Colors.purple[100],
+                    : theme.primaryContainer,
                 onPressed: () {
                   if (controller.tasks.isNotEmpty) {
                     Get.to(AddDialog(),
@@ -100,7 +102,7 @@ class MyHomePage extends GetView<HomeController> {
                 },
                 child: Icon(
                   controller.deleting.value ? Icons.delete : Icons.add,
-                  color: Colors.white,
+                  color: theme.tertiary,
                   size: 30,
                 ),
               ),
