@@ -6,15 +6,18 @@ import 'package:todo_gext_app/app/core/utlls/extensions.dart';
 import 'package:todo_gext_app/app/core/value/colors.dart';
 import 'package:todo_gext_app/app/data/model/task.dart';
 import 'package:todo_gext_app/app/modules/home/controller/controller.dart';
+import 'package:todo_gext_app/app/modules/home/controller/theme.dart';
 import 'package:todo_gext_app/app/widget/icons.dart';
 import 'package:todo_gext_app/app/widget/string_const.dart';
 
 class AddCard extends StatelessWidget {
   final homeController = Get.find<HomeController>();
+  final themeCtrl = Get.find<ThemeController>();
   AddCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
     final iconData = getIcons();
     var squareWidth = Get.width - 12.wp;
     return Container(
@@ -25,7 +28,6 @@ class AddCard extends StatelessWidget {
           onTap: () {
             Get.defaultDialog(
                 radius: 10,
-                backgroundColor: Colors.white,
                 title: AppString.taskType,
                 titleStyle:
                     TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
@@ -92,8 +94,7 @@ class AddCard extends StatelessWidget {
                                 .map((e) => Obx(() {
                                       final index = iconData.indexOf(e);
                                       return ChoiceChip(
-                                          selectedColor: Colors.grey[200],
-                                          backgroundColor: Colors.white,
+                                          selectedColor: theme.onTertiary,
                                           elevation: 0,
                                           side: BorderSide.none,
                                           label: e,

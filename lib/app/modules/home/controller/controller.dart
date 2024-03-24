@@ -11,16 +11,19 @@ class HomeController extends GetxController {
   final task = Rx<TaskModel?>(null);
   final formKey = GlobalKey<FormState>();
   final chipIndex = 0.obs;
+  final currentIndex = 0.obs;
+  PageController? pageCtrl;
   final deleting = false.obs;
   final editController = TextEditingController();
   final doingTodos = <dynamic>[].obs;
   final doneTodos = <dynamic>[].obs;
-  
+
   @override
   void onInit() {
     super.onInit();
     tasks.assignAll(taskRepository.readTask());
     ever(tasks, (_) => taskRepository.writeTask(tasks));
+    pageCtrl = PageController(initialPage: currentIndex.value);
   }
 
   @override
@@ -33,7 +36,13 @@ class HomeController extends GetxController {
   @override
   void dispose() {
     editController.dispose();
+    pageCtrl!.dispose();
     super.dispose();
+  }
+
+  void changeIndex(int index) {
+    currentIndex.value = index;
+    pageCtrl!.jumpToPage(index);
   }
 
   void chnageChipdIndex(int value) {
@@ -155,6 +164,30 @@ class HomeController extends GetxController {
     for (var i = 0; i < task.todoList!.length; i++) {
       if (task.todoList![i]['done'] == true) {
         res += 1;
+      }
+    }
+    return res;
+  }
+
+  int getTotalTask() {
+    var res = 0;
+    for (var i = 0; i < tasks.length; i++) {
+      if (tasks[i].todoList != null) {
+        res += tasks[i].todoList!.length;
+      }
+    }
+    return res;
+  }
+
+  int getTotalDoneTask() {
+    var res = 0;
+    for (var i = 0; i < tasks.length; i++) {
+      if (tasks[i].todoList != null) {
+        for (var j = 0; j < tasks[i].todoList!.length; j++) {
+          if (tasks[i].todoList![j]['done'] == true) {
+            res += 1;
+          }
+        }
       }
     }
     return res;
