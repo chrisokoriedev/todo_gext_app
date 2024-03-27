@@ -12,7 +12,10 @@ class ReportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      onPopInvoked: (value) => homeCtrl.pageCtrl!.jumpToPage(0),
+      canPop: false,
+      onPopInvoked: (value) {
+        homeCtrl.pageCtrl!.jumpToPage(0);
+      },
       child: ListView(
         children: [
           Obx(() {
