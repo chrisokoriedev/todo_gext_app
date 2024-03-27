@@ -11,100 +11,103 @@ class AddDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Form(
-        key: homeCtrl.formKey,
-        child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 3.wp, vertical: 5.wp),
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                    onPressed: () {
-                      Get.back();
-                      homeCtrl.editController.clear();
-                      homeCtrl.changeTask(null);
-                    },
-                    icon: const Icon(Icons.close)),
-                TextButton(
-                    style: ButtonStyle(
-                        overlayColor: MaterialStateColor.resolveWith(
-                            (states) => Colors.transparent)),
-                    onPressed: () {
-                      if (homeCtrl.formKey.currentState!.validate()) {
-                        if (homeCtrl.task.value == null) {
-                          EasyLoading.showError(AppString.enterTaskType);
-                        } else {
-                          var success = homeCtrl.updateTask(
-                              homeCtrl.task.value!,
-                              homeCtrl.editController.text);
-                          if (success) {
-                            EasyLoading.showSuccess(AppString.todoItemAdded);
-                            Get.back();
-                            homeCtrl.editController.clear();
-
-                            homeCtrl.changeTask(null);
+    return PopScope(
+      onPopInvoked: (value) async => false,
+      child: Scaffold(
+        body: Form(
+          key: homeCtrl.formKey,
+          child: ListView(
+            padding: EdgeInsets.symmetric(horizontal: 3.wp, vertical: 5.wp),
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Get.back();
+                        homeCtrl.editController.clear();
+                        homeCtrl.changeTask(null);
+                      },
+                      icon: const Icon(Icons.close)),
+                  TextButton(
+                      style: ButtonStyle(
+                          overlayColor: MaterialStateColor.resolveWith(
+                              (states) => Colors.transparent)),
+                      onPressed: () {
+                        if (homeCtrl.formKey.currentState!.validate()) {
+                          if (homeCtrl.task.value == null) {
+                            EasyLoading.showError(AppString.enterTaskType);
                           } else {
-                            EasyLoading.showInfo(AppString.todoItemExist);
+                            var success = homeCtrl.updateTask(
+                                homeCtrl.task.value!,
+                                homeCtrl.editController.text);
+                            if (success) {
+                              EasyLoading.showSuccess(AppString.todoItemAdded);
+                              Get.back();
+                              homeCtrl.editController.clear();
+
+                              homeCtrl.changeTask(null);
+                            } else {
+                              EasyLoading.showInfo(AppString.todoItemExist);
+                            }
                           }
                         }
-                      }
-                    },
-                    child: Text(
-                      AppString.done,
-                      style: TextStyle(fontSize: 14.sp),
-                    ))
-              ],
-            ),
-            Text(
-              AppString.newTask,
-              style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
-            ),
-            TextFormField(
-              controller: homeCtrl.editController,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return AppString.enterTodoItem;
-                }
+                      },
+                      child: Text(
+                        AppString.done,
+                        style: TextStyle(fontSize: 14.sp),
+                      ))
+                ],
+              ),
+              Text(
+                AppString.newTask,
+                style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
+              ),
+              TextFormField(
+                controller: homeCtrl.editController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return AppString.enterTodoItem;
+                  }
 
-                return null;
-              },
-              decoration: InputDecoration(
-                  focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey[100]!))),
-            ),
-            SizedBox(height: 5.wp),
-            Text(AppString.addTo,
-                style: TextStyle(fontSize: 14.sp, color: Colors.grey[700])),
-            ...homeCtrl.tasks
-                .map((element) => Obx(
-                      () => InkWell(
-                        onTap: () => homeCtrl.changeTask(element),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 2.wp),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    IconData(element.icon,
-                                        fontFamily: AppString.materialIcons),
-                                    color: HexColor.fromHex(element.color),
-                                  ),
-                                  Text(element.title),
-                                ],
-                              ),
-                              if (homeCtrl.task.value == element)
-                                const Icon(Icons.check, color: Colors.blue)
-                            ],
+                  return null;
+                },
+                decoration: InputDecoration(
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey[100]!))),
+              ),
+              SizedBox(height: 5.wp),
+              Text(AppString.addTo,
+                  style: TextStyle(fontSize: 14.sp, color: Colors.grey[700])),
+              ...homeCtrl.tasks
+                  .map((element) => Obx(
+                        () => InkWell(
+                          onTap: () => homeCtrl.changeTask(element),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 2.wp),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      IconData(element.icon,
+                                          fontFamily: AppString.materialIcons),
+                                      color: HexColor.fromHex(element.color),
+                                    ),
+                                    Text(element.title),
+                                  ],
+                                ),
+                                if (homeCtrl.task.value == element)
+                                  const Icon(Icons.check, color: Colors.blue)
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ))
-                .toList()
-          ],
+                      ))
+                  .toList()
+            ],
+          ),
         ),
       ),
     );
