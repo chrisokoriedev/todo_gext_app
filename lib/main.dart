@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:todo_gext_app/app/data/services/storage/services.dart';
 import 'package:todo_gext_app/app/modules/home/controller/binding.dart';
 import 'package:todo_gext_app/app/modules/home/view.dart';
+import 'package:todo_gext_app/app/widget/string_const.dart';
 
 import 'app/core/value/theme.dart';
 import 'app/modules/home/controller/theme.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: ',
+      title: AppString.appName,
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeController.currentTheme.value,
