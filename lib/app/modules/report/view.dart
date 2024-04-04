@@ -97,7 +97,7 @@ class ReportScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(Icons.circle_outlined, color: color),
-        SizedBox(width: 2.wp),
+        SizedBox(width: 2.wp), 
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
