@@ -40,10 +40,11 @@ class ReportScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      
                       buildStatus(Colors.green, liveTask, 'Live Task'),
                       buildStatus(Colors.orange, completedTask, 'Completed'),
                       buildStatus(Colors.blue, createdTasks, 'Created'),
-                      
+
                     ],
                   ),
                   SizedBox(height: 20.wp),
