@@ -1,5 +1,6 @@
 class AppString {
   static const String enterTaskType = 'Enter Task Type';
+  static const String appName = 'Enter Task Type';
   static const String enterTodoItem = 'Enter todo item';
   static const String done = 'Done';
   static const String cancel = 'Cancel';

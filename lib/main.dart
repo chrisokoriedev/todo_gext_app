@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Todo App',
+      title: ',
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeController.currentTheme.value,
