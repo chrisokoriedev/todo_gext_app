@@ -7,6 +7,7 @@ import 'package:todo_gext_app/app/modules/home/controller/controller.dart';
 
 class ReportScreen extends StatelessWidget {
   final homeCtrl = Get.find<HomeController>();
+
   ReportScreen({super.key});
 
   @override
